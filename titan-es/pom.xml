@@ -19,7 +19,7 @@
           which it depends and modify ../titan-lucene/pom.xml
           as necessary to keep the versions matched.
         -->
-        <elasticsearch.version>1.2.0</elasticsearch.version>
+        <elasticsearch.version>1.5.2</elasticsearch.version>
     </properties>
     <dependencies>
         <dependency>
