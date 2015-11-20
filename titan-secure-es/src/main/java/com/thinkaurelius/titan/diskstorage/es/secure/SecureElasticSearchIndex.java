@@ -59,6 +59,8 @@ import org.elasticsearch.index.query.OrFilterBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import static org.elasticsearch.script.ScriptService.ScriptType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -167,7 +169,9 @@ public class SecureElasticSearchIndex extends ElasticSearchIndex {
                                     script.append("ctx._source.remove(\"").append(key).append("\"); ");
                                 }
                                 log.trace("Deleting individual fields [{}] for document {}", deletions, docid);
-                                client.prepareUpdate(indexName, storename, docid).setParent(parentid).setScript(script.toString()).execute().actionGet();
+                                client.prepareUpdate(indexName, storename, docid).setParent(parentid)
+					.setScript(script.toString(), ScriptType.INLINE)
+					.execute().actionGet();
                             }
                         }
                     }
